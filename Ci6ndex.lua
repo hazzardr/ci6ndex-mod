@@ -1385,6 +1385,7 @@ function GetTurnInformations()
     local GamePopulation = 0;
 	for _, pPlayer in ipairs(kPlayers) do
         local playerID  = pPlayer:GetID();
+        print("brian test"..playerID)
         HistoryData.PlayerData[playerID][CurrentTurn]    = {}
         local PlayerToolTip = "";
         local playerRealPop = 0
