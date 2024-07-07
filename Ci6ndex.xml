@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Context>
+    
+    <CheckBox ID="ActivateHistoryMod"  Offset="40,0" Anchor="C,T" UseSelectedTextures="1" ButtonSize="44,44"  ButtonTexture="LaunchBar_Hook_ButtonMedium" Style="ButtonNormalText" ToolTip="Open History View" CheckTexture="Controls_Bolt" CheckColor="0,0,0,0">
+        <Image Icon="ICON_ACCESS_LEVEL" Size="35,35" Anchor="C,C" Offset="0,2" Color="255,200,100,200" />
+    </CheckBox>
+    <Image ID="HistoryView" Texture="WorldBuilder_BG"  Color="255,255,255,0" Size="parent,parent" Anchor="C,C" Hidden="1" ConsumeMouse="1" ConsumeMouseWheel="0">
+        <Box	ID = "MapBox" Anchor="C,B" Color="0,0,0,0" Size="parent,parent"  />
+        
+
+        <WorldAnchor				ID="PlotAnchor" Scaling="1" UnitsPerPixel="0.03" >
+            <Image Texture="WorldBuilder_BG"  Color="255,255,255,255" Size="100000,50000" Anchor="C,C"/>
+            <Stack  ID="PlotStackUp" StackGrowth="Up"  StackPadding="-97,0"/> 
+        </WorldAnchor>
+        
+        
+        <AlphaAnim ID="PlotInfoStackTime" Begin="0" End="1" Speed="8" Cycle="Once" Stopped="1"/>
+        <AlphaAnim ID="MoveCameraTimer" Begin="0" End="1" Speed="20" Cycle="Once" Stopped="1" />
+        <Grid ID="HeaderGrid" Texture="Controls_LensHeaderSmall" Offset="0,0" SliceTextureSize="71,49" SliceCorner="20,24" Size="parent,80" Color="255,255,255,255">
+            <Image ID="HeaderDropshadow" Texture="Controls_GradientSmall" Size="parent,22"  Color="0,0,0,255" Anchor="L,B" AnchorSide="I,O"/>
+            <Stack StackGrowth="Right" Anchor="L,T" Offset="25,10" Padding="30">
+                
+                <Label ID="LensText" String="HISTORY VIEW"  Style="FontFlair22" SmallCaps="26" FontStyle="glow" ColorSet="WonderHeader"  Offset="0,0"/>
+                <Stack StackGrowth="Right" StackPadding="0,0"  Offset="0,-10">
+                    <CheckBox ID="OpenOptionButton"  Size="32,32" ToolTip="Option" Anchor="C,C" UseSelectedTextures="1" ButtonSize="44,44"  ButtonTexture="LaunchBar_Hook_ButtonMedium" Style="ButtonNormalText" CheckTexture="Controls_Bolt" CheckColor="0,0,0,0" String="[ICON_PRODUCTIONLarge]" TextOffset="33"/>
+                    <CheckBox ID="ReligionToggle"  Size="32,32" ToolTip="Religion" Anchor="C,C" UseSelectedTextures="1" ButtonSize="44,44"  ButtonTexture="LaunchBar_Hook_ButtonMedium" Style="ButtonNormalText" CheckTexture="Controls_Bolt" CheckColor="0,0,0,0">
+                    <Image Icon="ICON_Religion" Size="26,26" Anchor="C,C" Color="255,255,255,255" />
+                    </CheckBox>
+                    <CheckBox ID="GovernmentToggle"  Size="32,32" ToolTip="Government" Anchor="C,C" UseSelectedTextures="1" ButtonSize="44,44"  ButtonTexture="LaunchBar_Hook_ButtonMedium" Style="ButtonNormalText" CheckTexture="Controls_Bolt" CheckColor="0,0,0,0">
+                    <Image Icon="ICON_Government" Size="26,26" Anchor="C,C" Offset="0,-2" Color="200,200,200,255" />
+                    </CheckBox>
+                </Stack>
+            </Stack>
+            <Stack StackGrowth="Right" Anchor="C,T" StackPadding="20,0" Offset="0,10">
+                <Label ID="TurnDisplayedLabel" String="Turn 1" Color="200,150,100,255" Style="FontFlair22" SmallCaps="26" FontStyle="glow" ColorSet="WonderHeader" />
+                <Label ID="TurnDate" String="2100" Color="200,150,100,255" Style="FontFlair22" SmallCaps="26" FontStyle="glow" ColorSet="WonderHeader" />       
+            </Stack>
+            <Container Size="193,20"  Anchor="R,C" StackPadding="0,0"  Offset="40,15">
+                        <Grid Size="194,26" Texture="Controls_Search2" StateOffsetIncrement="0,26" SliceCorner="30,14" SliceSize="1,1" SliceTextureSize="41,26">
+                            <EditBox ID="SearchEditBox" Offset="32,3" Size="parent-24,22" CallOnChar="1" EditMode="1" Style="TreeOptionText" MaxLength="24" String="LOC_TREE_SEARCH_W_DOTS"/>
+                        </Grid>
+                        <Container ID="SearchResultsPanelContainer" Anchor="L,T" Offset="0,26" Size="193,auto" Hidden="1">
+                            <ScrollPanel ID="SearchResultsPanel" Size="parent,600" Vertical="1" AutoScrollBar="1">
+                            <ScrollBar Style="Slider_Blue" Anchor="R,C" AnchorSide="O,I"/>
+                                <Grid Texture="Controls_OptionPanel" SliceCorner="3,3" SliceSize="10,52" SliceTextureSize="16,64" Size="193,auto" AutoSizePadding="0,5">
+                                    <Stack ID="SearchResultsStack" StackGrowth="Bottom" Padding="2" Offset="0,5"/>
+                                </Grid>
+                            </ScrollPanel>
+                        </Container>
+            </Container>
+            
+            <Stack StackGrowth="Right" Anchor="R,T" StackPadding="0,0"  Offset="30,0">
+                
+                    
+                
+                <CheckBox ID="toggleButton1"  Size="32,32" ToolTip="Hide City" Anchor="C,C" UseSelectedTextures="1" ButtonSize="44,44"  ButtonTexture="LaunchBar_Hook_ButtonMedium" Style="ButtonNormalText"  CheckTexture="Controls_Bolt" CheckColor="0,0,0,0">    
+                    <Image ID="IcontoggleButton1" Icon="ICON_CIVILOPEDIA_BUILDINGS" Size="26,26" Anchor="C,C" Offset="0,-2" Color="255,255,255,255" />
+                    <Line ID="RedLine1"	Start="33,9"	End="10,33"	Color="255,0,0,255" Width="2" Hidden="1" />
+                </CheckBox>
+                <Button	ID="SwitchOrder1" ToolTip="Change Display order"	Anchor="C,C" Size="23,15" String="[ICON_TradeRouteLarge]" ConsumeMouse="1" />
+                <CheckBox ID="toggleButton2"  Size="32,32" ToolTip="Hide Barbarians Villages" Anchor="C,C" UseSelectedTextures="1" ButtonSize="44,44"  ButtonTexture="LaunchBar_Hook_ButtonMedium" Style="ButtonNormalText"  CheckTexture="Controls_Bolt" CheckColor="0,0,0,0">
+                    <Image ID="IcontoggleButton2" Icon="ICON_IMPROVEMENT_CAMP" Size="26,26" Anchor="C,C" Offset="0,-2" Color="255,0,0,255" />
+                    <Line ID="RedLine2"	Start="33,9"	End="10,33"	Color="255,0,0,255" Width="2" Hidden="1" />
+                </CheckBox>
+                <Button	ID="SwitchOrder2" ToolTip="Change Display order"	Anchor="C,C" Size="23,15" String="[ICON_TradeRouteLarge]" ConsumeMouse="1" />
+                <CheckBox ID="toggleButton3"  Size="32,32" ToolTip="Hide Units" Anchor="C,C" UseSelectedTextures="1" ButtonSize="44,44"  ButtonTexture="LaunchBar_Hook_ButtonMedium" Style="ButtonNormalText"  CheckTexture="Controls_Bolt" CheckColor="0,0,0,0">
+                    <Image ID="IcontoggleButton3" Icon="ICON_Unit_Warrior" Size="26,26" Anchor="C,C" Offset="0,-2" Color="255,100,0,255" />
+                    <Line ID="RedLine3"	Start="33,9"	End="10,33"	Color="255,0,0,255" Width="2" Hidden="1" />
+                </CheckBox>
+                <Button	ID="SwitchOrder3" ToolTip="Change Display order"	Anchor="C,C" Size="23,15" String="[ICON_TradeRouteLarge]" ConsumeMouse="1" />
+                <CheckBox ID="toggleButton4"  Size="32,32" ToolTip="Hide Wonders" Anchor="C,C" UseSelectedTextures="1" ButtonSize="44,44"  ButtonTexture="LaunchBar_Hook_ButtonMedium" Style="ButtonNormalText"  CheckTexture="Controls_Bolt" CheckColor="0,0,0,0">
+                    <Image ID="IcontoggleButton4" Icon="ICON_NOTIFICATION_WONDER_COMPLETED" Size="26,26" Anchor="C,C" Offset="0,-2" Color="255,220,0,255" />
+                    <Line ID="RedLine4"	Start="33,9"	End="10,33"	Color="255,0,0,255" Width="2" Hidden="1" />
+                </CheckBox>
+                <Button	ID="SwitchOrder4" ToolTip="Change Display order"	Anchor="C,C" Size="23,15" String="[ICON_TradeRouteLarge]" ConsumeMouse="1" />
+                <CheckBox ID="toggleButton5"  Size="32,32" ToolTip="Hide Districts" Anchor="C,C" UseSelectedTextures="1" ButtonSize="44,44"  ButtonTexture="LaunchBar_Hook_ButtonMedium" Style="ButtonNormalText"  CheckTexture="Controls_Bolt" CheckColor="0,0,0,0">
+                    <Image ID="IcontoggleButton5" Icon="ICON_DISTRICT_CITY_CENTER" Size="26,26" Anchor="C,C" Offset="0,-2" Color="255,255,255,255" />
+                    <Line ID="RedLine5"	Start="33,9"	End="10,33"	Color="255,0,0,255" Width="2" Hidden="1" />
+                </CheckBox>
+                <Button	ID="SwitchOrder5" ToolTip="Change Display order"	Anchor="C,C" Size="23,15" String="[ICON_TradeRouteLarge]" ConsumeMouse="1" />
+                <CheckBox ID="toggleButton6"  Size="32,32" ToolTip="Hide Ressources" Anchor="C,C" UseSelectedTextures="1" ButtonSize="44,44"  ButtonTexture="LaunchBar_Hook_ButtonMedium" Style="ButtonNormalText"  CheckTexture="Controls_Bolt" CheckColor="0,0,0,0">
+                    <Image ID="IcontoggleButton6" Icon="ICON_RESOURCE_WHEAT" Size="26,26" Anchor="C,C" Offset="0,-2" Color="255,255,255,255" />
+                    <Line ID="RedLine6"	Start="33,9"	End="10,33"	Color="255,0,0,255" Width="2" Hidden="1" />
+                </CheckBox>
+                
+            </Stack>      
+            <Button ID="CloseButton" Texture="Controls_CloseButtonAlt" Size="32,32" Anchor="R,C" Offset="2,0"/>  
+            <Container			Anchor="C,T"	Offset="0,40"		Size="400,61" >
+			     <Image			Anchor="C,C"		Size="300,27"		Texture="Controls_TabLedge2_Fill" StretchMode="Tile" />
+			     <Grid	Size="400,61"	Anchor="C"	Texture="Controls_TabLedge2"  SliceCorner="194,18" SliceSize="52,26" SliceTextureSize="438,61">
+				    <Container			ID="TabContainer"			Offset="50,13"	Size="parent-80,34">
+                    
+                        <Stack StackGrowth="Right" Anchor="C,B" >
+                            <Button	ID="LeftArrow" ToolTip="Previous Turn"	Anchor="C,C" Size="19,23" Texture="Controls_ArrowButtonLeft" ConsumeMouse="1" Offset="0,3"/>
+                            <AlphaAnim	ID="TimeCallback" Cycle="Once" Speed="8"  Offset="0,3"/>
+                            <CheckBox	ID="PlayPauseButton" ToolTip="Play" Anchor="C,C"	ButtonTexture="SelectionPanel_Stat"	ButtonSize="28,32" CheckTexture="Stats22"	CheckTextureOffset="66,0" CheckSize="22,22" CheckOffset="3,3"	UnCheckTexture="Stats22"	UnCheckTextureOffset="66,0"	UnCheckSize="22,22" UnCheckOffset="3,3" UseSelectedTextures="1" CheckColor="0,0,0,255" Offset="0,3" />
+                            <GridButton ID="AcceleratePlay"  FontStyle="Glow" TextAnchor="C,C" TextOffset="0,-2" Texture="Controls_ButtonControl_Reports"	SliceCorner="12,12"	SliceSize="1,1"	SliceTextureSize="29,29" StateOffsetIncrement="0,29" String="x1" ToolTip="Faster" Size="29,29" Offset="0,4" />
+                            <Button	ID="RightArrow"	Anchor="C,C" Size="19,23" ToolTip="Next Turn" Texture="Controls_ArrowButtonRight" ConsumeMouse="1" Offset="0,3"/>
+                            
+                        </Stack>
+				    </Container>
+			     </Grid>
+		    </Container>
+        </Grid>
+        <Button	ID="ShowKeyPanel"	Anchor="L,T" Size="19,23" ToolTip="Open Key Panel" Texture="Controls_ArrowButtonRight" ConsumeMouse="1" Offset="0,100"  Hidden="1"/>
+        
+        <Grid	ID="KeyPanel"	Anchor="L,T"	Offset="0,100" Size="350,500"	AutoSizePadding="0,10" Texture="Controls_PanelBlue"  SliceCorner="25,28" SliceSize="33,18" SliceTextureSize="83,75">
+            <Line	Anchor="C,T" Start="10,16"	End="parent-50,16"	Color="55,95,126,255" Width="2" />
+            <Label  Anchor="C,T"	Offset="0,20"		Style="FontFlair16" SmallCaps="20" String="LOC_TREE_KEY" Color0="78,119,151,255" Color1="0,0,0,0" Color2="25,65,96,255" />
+            <Line	Anchor="C,T" Start="10,40"	End="parent-50,40"	Color="55,95,126,255" Width="2" />
+            <Button ID="HideKeyPanel" Anchor="R,T" ToolTip="Close Key Panel" String="x" Offset="10,10" Size="10,10"/>
+            <Stack ID="OrderChoosePullDownStack" Anchor="C,T"     Offset="0,50"     StackGrowth="Left" Padding="5">
+                <PullDown ID="OrderChoosePullDown" Style="PullDownBlue" ScrollThreshold="400" Size="200,24" Offset="0,0" SpaceForScroll="0"/>
+                <Label Anchor="L,C" Style="ShellOptionText" String="Order:"/>
+            </Stack>
+            <ScrollPanel ID="LoyaltyInfoScrollPanel" Anchor="L,B" Offset="0,0" Size="parent,parent-75" Vertical="1" AutoScrollBar="1">
+                <ScrollBar ID="HeritageScrollbar" Anchor="L,C" Offset="3,0" Size="8,100" Style="ScrollVerticalBar" Color="150,48,42,255">
+                        <Thumb ID="HeritageTHumb" Style="ScrollThumb" Color="150,48,42,255"/>
+                </ScrollBar>
+                <Stack ID="Legende" Anchor="L,T" Offset="15,0"/>
+            </ScrollPanel>
+           
+        </Grid>
+        <Grid	Anchor="L,B"	Offset="0,0" Size="330,150"	AutoSizePadding="0,10" Texture="Controls_PanelBlue"  SliceCorner="25,28" SliceSize="33,18" SliceTextureSize="83,75">
+            <Line	Start="20,16"	End="303,16"	Color="55,95,126,255" Width="2" />
+            <Label  Anchor="C,T"	Offset="0,20"		Style="FontFlair16" SmallCaps="20" String="GLOBAL POPULATION" Color0="78,119,151,255" Color1="0,0,0,0" Color2="25,65,96,255" />
+            <Line	Start="20,40"	End="303,40"	Color="55,95,126,255" Width="2" />
+            <Label ID="Population" Style="FontFlair30" SmallCaps="50" FontStyle="glow" Color="255,255,255,255" Anchor="C,C" String="1540000000" Offset="0,15"/>
+        </Grid>
+        <Stack    Anchor="C,B" Size="276,200" Offset="50,50" StackGrowth="Right" StackPadding="-2,0">
+            <SlideAnim ID="HideGovernmentAnim" Anchor="C,B" Size="276,200" Start="0,-249" End="0,0" Cycle="Once" Stopped="0" Speed="1" ID="SlideXAnim">
+                <Grid 	Size="276,200"	Texture="CivicPanel_ChooserButton"	StateOffsetIncrement="0,80" SliceCorner="70,62" SliceTextureSize="102,-2000" SliceSize="0,150" Color="255,255,255,127">
+                    <Image ID="GovernmentCloseButton" Anchor="L,T" Offset="0,2" Size="51,51" Texture="LaunchBar_Hook_ScienceButton" Style="ButtonNormalText" TextureOffset="4,9" StateOffsetIncrement="0,60" >
+                        <Image  Anchor="C,T" Offset="0,0" Size="38,38" Texture="LaunchBar_Hook_Government"/>
+                    </Image>
+                    <Grid Anchor="C,T" Size="220,40" Texture="Banner_DataFrame"  SliceCorner="23,6" SliceSize="76,15" SliceTextureSize="122,30"  Offset="19,20" >
+                        <Label		Anchor="C,C" Offset="0,0" Color="255,255,255,255"	String="Diplomacy and Government"	Style="FontNormal14" FontStyle="Stroke" Color1="0,0,0,150"/>
+                    </Grid>
+                    <Button ID="CollapseButtonGovernment" Anchor="C,T" AnchorSide="I,O" Offset="0,-3"	Size="47,16"	Hidden="0" Texture="Controls_Collapse.dds" ToolTip="Close Government Informations" />
+				    <Button ID="ExpandButtonGovernment" Anchor="C,T" AnchorSide="I,O" Offset="0,-3"	Size="47,16"	Hidden="1" ConsumeAllMouse="1" Texture="Controls_ButtonExtend.dds" ToolTip="Open Government Informations" />
+                    <Stack Size="200,200" Anchor="C,T" Offset="0,85" StackPadding="5,0">
+                        <Label	ID="GovernmentLabel1"	Anchor="L,C" Offset="0,0" Color="255,255,255,255"	Style="FontNormal14" FontStyle="Stroke" Color1="0,0,0,150" WrapWidth="255"/>
+                        <Label	ID="GovernmentLabel2"	Anchor="L,C" Offset="0,0" Color="255,255,255,220"	Style="FontNormal14" FontStyle="Stroke" Color1="0,0,0,150" WrapWidth="255"/>
+                        <Label	ID="GovernmentLabel3"	Anchor="L,C" Offset="0,0" Color="255,255,255,200"	Style="FontNormal14" FontStyle="Stroke" Color1="0,0,0,150" WrapWidth="255"/>
+                        <Label	ID="GovernmentLabel4"	Anchor="L,C" Offset="0,0" Color="255,255,255,180"	Style="FontNormal14" FontStyle="Stroke" Color1="0,0,0,150" WrapWidth="255"/>
+                        <Label	ID="GovernmentLabel5"	Anchor="L,C" Offset="0,0" Color="255,255,255,160"	Style="FontNormal14" FontStyle="Stroke" Color1="0,0,0,150" WrapWidth="255"/>
+                        <Label	ID="GovernmentLabel6"	Anchor="L,C" Offset="0,0" Color="255,255,255,140"	Style="FontNormal14" FontStyle="Stroke" Color1="0,0,0,150" WrapWidth="255"/>
+                        <Label	ID="GovernmentLabel7"	Anchor="L,C" Offset="0,0" Color="255,255,255,120"	Style="FontNormal14" FontStyle="Stroke" Color1="0,0,0,150" WrapWidth="255"/>
+                        <Label	ID="GovernmentLabel8"	Anchor="L,C" Offset="0,0" Color="255,255,255,100"	Style="FontNormal14" FontStyle="Stroke" Color1="0,0,0,150" WrapWidth="255"/>
+                        <Label	ID="GovernmentLabel9"	Anchor="L,C" Offset="0,0" Color="255,255,255,80"	Style="FontNormal14" FontStyle="Stroke" Color1="0,0,0,150" WrapWidth="255"/>
+                        <Label	ID="GovernmentLabel10"	Anchor="L,C" Offset="0,0" Color="255,255,255,60"	Style="FontNormal14" FontStyle="Stroke" Color1="0,0,0,150" WrapWidth="255"/>
+                    </Stack>
+                </Grid>
+            </SlideAnim>
+            <SlideAnim ID="HideCultureAnim" Anchor="C,B" Size="276,200" Start="0,-249" End="0,0" Cycle="Once" Stopped="0" Speed="1" ID="SlideXAnim">
+                <Grid	 Size="276,200" Anchor="C,B"	Texture="CivicPanel_ChooserButton"	StateOffsetIncrement="0,80" SliceCorner="70,62" SliceTextureSize="102,-2000" SliceSize="0,150" >
+                    <Image ID="CultureCloseButton" Anchor="L,T" Offset="0,2" Size="51,51" Texture="LaunchBar_Hook_ScienceButton" Style="ButtonNormalText" TextureOffset="4,9" StateOffsetIncrement="0,60" >
+                        <Image  Anchor="C,T" Offset="0,4" Size="38,38" Texture="LaunchBar_Hook_CivicsTree"/>
+                    </Image>
+                    <Label		Anchor="C,T" Offset="15,33" Color="255,50,147,255"	String="Culture and Society"	Style="FontNormal14" FontStyle="Stroke" Color1="0,0,0,150"/>
+                    <Button ID="CollapseButtonCulture" Anchor="C,T" AnchorSide="I,O" Offset="0,-3"	Size="47,16"	Hidden="0" Texture="Controls_Collapse.dds" ToolTip="Close Culure Informations" />
+				    <Button ID="ExpandButtonCulture" Anchor="C,T" AnchorSide="I,O" Offset="0,-3"	Size="47,16"	Hidden="1" ConsumeAllMouse="1" Texture="Controls_ButtonExtend.dds" ToolTip="Open Culure Informations" />
+                    <Stack Size="200,200" Anchor="C,T" Offset="0,85" StackPadding="5,0">
+                        <Label	ID="CultureLabel1" 	Anchor="L,C" Offset="0,0" Color="255,50,147,255"	Style="FontNormal14" FontStyle="Stroke" Color1="0,0,0,150" WrapWidth="255"/>
+                        <Label	ID="CultureLabel2"	Anchor="L,C" Offset="0,0" Color="255,50,147,220"	Style="FontNormal14" FontStyle="Stroke" Color1="0,0,0,150" WrapWidth="255"/>
+                        <Label	ID="CultureLabel3"	Anchor="L,C" Offset="0,0" Color="255,50,147,200"	Style="FontNormal14" FontStyle="Stroke" Color1="0,0,0,150" WrapWidth="255"/>
+                        <Label	ID="CultureLabel4"	Anchor="L,C" Offset="0,0" Color="255,50,147,180"	Style="FontNormal14" FontStyle="Stroke" Color1="0,0,0,150" WrapWidth="255"/>
+                        <Label	ID="CultureLabel5"	Anchor="L,C" Offset="0,0" Color="255,50,147,160"	Style="FontNormal14" FontStyle="Stroke" Color1="0,0,0,150" WrapWidth="255"/>
+                        <Label	ID="CultureLabel6"	Anchor="L,C" Offset="0,0" Color="255,50,147,140"	Style="FontNormal14" FontStyle="Stroke" Color1="0,0,0,150" WrapWidth="255"/>
+                        <Label	ID="CultureLabel7"	Anchor="L,C" Offset="0,0" Color="255,50,147,120"	Style="FontNormal14" FontStyle="Stroke" Color1="0,0,0,150" WrapWidth="255"/>
+                        <Label	ID="CultureLabel8"	Anchor="L,C" Offset="0,0" Color="255,50,147,100"	Style="FontNormal14" FontStyle="Stroke" Color1="0,0,0,150" WrapWidth="255"/>
+                        <Label	ID="CultureLabel9"	Anchor="L,C" Offset="0,0" Color="255,50,147,80"	    Style="FontNormal14" FontStyle="Stroke" Color1="0,0,0,150" WrapWidth="255"/>
+                        <Label	ID="CultureLabel10"	Anchor="L,C" Offset="0,0" Color="255,50,147,60"	    Style="FontNormal14" FontStyle="Stroke" Color1="0,0,0,150" WrapWidth="255"/>
+                    </Stack>
+                </Grid>
+            </SlideAnim>
+            <SlideAnim ID="HideScienceAnim" Anchor="C,B" Size="276,200" Start="0,-249" End="0,0" Cycle="Once" Stopped="0" Speed="1" ID="SlideXAnim">
+                <Grid	Size="276,200" Anchor="C,B"	Texture="ResearchPanel_ChooserButton"	StateOffsetIncrement="0,80" SliceCorner="70,62" SliceTextureSize="102,-2000" SliceSize="0,150" >
+                    <Image ID="ScienceCloseButton" Anchor="L,T" Offset="0,2" Size="51,51" Texture="LaunchBar_Hook_ScienceButton" Style="ButtonNormalText" TextureOffset="4,9" StateOffsetIncrement="0,60" >
+                        <Image  Anchor="C,T" Offset="0,4" Size="38,38" Texture="LaunchBar_Hook_TechTree"/>
+                    </Image>
+                    <Label		Anchor="C,T" Offset="15,33" Color="0,255,255,255"	String="Technology and Discovery"	Style="FontNormal14" FontStyle="Stroke" Color1="0,0,0,150"/>
+                    <Button ID="CollapseButtonScience" Anchor="C,T" AnchorSide="I,O" Offset="0,-3"	Size="47,16"	Hidden="0" Texture="Controls_Collapse.dds" ToolTip="Close Science Informations" />
+				    <Button ID="ExpandButtonScience" Anchor="C,T" AnchorSide="I,O" Offset="0,-3"	Size="47,16"	Hidden="1" ConsumeAllMouse="1" Texture="Controls_ButtonExtend.dds" ToolTip="Open Science Informations" />
+                    <Stack Size="200,200" Anchor="C,T" Offset="0,85" StackPadding="5,0">
+                        <Label	ID="ScienceLabel1"	Anchor="L,C" Offset="0,0" Color="0,255,255,255"	Style="FontNormal14" FontStyle="Stroke" Color1="0,0,0,150" WrapWidth="255"/>
+                        <Label	ID="ScienceLabel2"	Anchor="L,C" Offset="0,0" Color="0,255,255,220"	Style="FontNormal14" FontStyle="Stroke" Color1="0,0,0,150" WrapWidth="255"/>
+                        <Label	ID="ScienceLabel3"	Anchor="L,C" Offset="0,0" Color="0,255,255,200"	Style="FontNormal14" FontStyle="Stroke" Color1="0,0,0,150" WrapWidth="255"/>
+                        <Label	ID="ScienceLabel4"	Anchor="L,C" Offset="0,0" Color="0,255,255,180"	Style="FontNormal14" FontStyle="Stroke" Color1="0,0,0,150" WrapWidth="255"/>
+                        <Label	ID="ScienceLabel5"	Anchor="L,C" Offset="0,0" Color="0,255,255,160"	Style="FontNormal14" FontStyle="Stroke" Color1="0,0,0,150" WrapWidth="255"/>
+                        <Label	ID="ScienceLabel6"	Anchor="L,C" Offset="0,0" Color="0,255,255,140"	Style="FontNormal14" FontStyle="Stroke" Color1="0,0,0,150" WrapWidth="255"/>
+                        <Label	ID="ScienceLabel7"	Anchor="L,C" Offset="0,0" Color="0,255,255,120"	Style="FontNormal14" FontStyle="Stroke" Color1="0,0,0,150" WrapWidth="255"/>
+                        <Label	ID="ScienceLabel8"	Anchor="L,C" Offset="0,0" Color="0,255,255,100"	Style="FontNormal14" FontStyle="Stroke" Color1="0,0,0,150" WrapWidth="255"/>
+                        <Label	ID="ScienceLabel9"	Anchor="L,C" Offset="0,0" Color="0,255,255,80"	Style="FontNormal14" FontStyle="Stroke" Color1="0,0,0,150" WrapWidth="255"/>
+                        <Label	ID="ScienceLabel10"	Anchor="L,C" Offset="0,0" Color="0,255,255,60"	Style="FontNormal14" FontStyle="Stroke" Color1="0,0,0,150" WrapWidth="255"/>
+                    </Stack>
+                </Grid>
+            </SlideAnim>  
+        </Stack>
+        <Grid ID="WarInfoExpanded" Size="320,500" Style="ButtonLightWeightGrid" Anchor="R,B" Offset="175,1" Hidden="1">
+            <Line	Start="156,55"	End="156,455"	Color="55,95,126,255" Width="2" />
+             <Stack StackGrowth="Right" Anchor="C,T">
+                <Container Size="55,55">
+			        <Image Texture="Controls_CircleBacking45" Size="51,51" Anchor="C,C" Offset="0,1"/>
+			        <Image ID="Portrait" Anchor="C,C" Size="45,45" Texture="Leaders45" />
+                    <Image ID="MinorCivIcon" Anchor="C,C" Size="30,30" Texture="Leaders45" />
+                    <Container   ID="WarAllyStack" Anchor="L,T" Size="parent,parent" StackGrowth="Right" StackPadding="-2,0"/>
+                </Container>
+                <Image Icon="ICON_BELIEF_GOD_OF_WAR" Size="51,51" Anchor="C,C" Offset="0,1" Color="255,2,2,255"/>
+                <Container Size="55,55">
+                    <Image Texture="Controls_CircleBacking45" Size="51,51" Anchor="C,C" Offset="0,1"/>
+			        <Image ID="Portrait2" Anchor="C,C" Size="45,45" Texture="Leaders45" />
+                    <Image ID="MinorCivIcon2" Anchor="C,C" Size="30,30" Texture="Leaders45" />
+                    <Container   ID="WarEnemyStack" Anchor="L,T" Size="parent,parent" StackGrowth="Right" StackPadding="-2,0"/>
+                </Container>
+            </Stack>
+            <Stack StackGrowth="Down" Anchor="L,T" Offset="-2, 60">        
+                <ScrollPanel ID="SearchResultsPanel" Size="160,210"  Vertical="1" AutoScrollBar="1">
+                        <ScrollBar Style="Slider_Blue" Anchor="L,C" AnchorSide="O,I"/>
+                            <Stack StackGrowth="Down" ID="AllyUnit" />
+                </ScrollPanel>
+                <Label String="[NEWLINE]Number Of Unit:" Style="FontNormal14" FontStyle="Stroke" />
+                <Label ID="AllyUnitNumber" String="[ICON_Unit]x100"  />
+                <Label String="[NEWLINE]Military Strength:" Style="FontNormal14" FontStyle="Stroke" />
+                <Label ID="AllyPower"String="[ICON_STRENGTH]30000 "/>
+                <Label String="[NEWLINE]Number Of City:" Style="FontNormal14" FontStyle="Stroke"/>
+                <Label ID="AllYCityNumber" String="[ICON_Housing]x100"  />
+                <Label String="[NEWLINE]Total left HP:" Style="FontNormal14" FontStyle="Stroke"/>
+                <Label ID="AllyHp" String="[ICON_UnderSiege]30000 "/>
+            </Stack>
+            <Stack StackGrowth="Down" Anchor="R,T" Offset="-4, 60">
+                <ScrollPanel ID="SearchResultsPanel" Size="160,210"  Vertical="1" AutoScrollBar="1">
+                        <ScrollBar Style="Slider_Blue" Anchor="R,C" AnchorSide="O,I"/>
+                            <Stack StackGrowth="Down" ID="EnemyUnit" />
+                </ScrollPanel>
+                <Label String="[NEWLINE]Number Of Unit:" Style="FontNormal14" FontStyle="Stroke" Offset="4,0"/>
+                <Label ID="EnemyUnitNumber" String="[ICON_Unit]x100"  Offset="4,0"/>
+                <Label String="[NEWLINE]Military Strength:" Style="FontNormal14" FontStyle="Stroke" Offset="4,0"/>
+                <Label ID="Enemypower" String="[ICON_STRENGTH]30000 " Offset="4,0"/>
+                <Label String="[NEWLINE]Number Of City:" Style="FontNormal14" FontStyle="Stroke" Offset="4,0"/>
+                <Label ID="EnemyCityNumber" String="[ICON_Housing]x100" Offset="4,0"/>
+                <Label String="[NEWLINE]Total left HP:" Style="FontNormal14" FontStyle="Stroke" Offset="4,0"/>
+                <Label ID="EnemyHp" String="[ICON_UnderSiege]30000 " Offset="4,0"/>
+            </Stack>
+        </Grid>
+        <Stack ID="WarInfoStack"	 Anchor="R,B"  StackGrowth="Up" StackPadding="1,0" Offset="0,1" />
+        
+        <Box ID="HistoryViewOptionPanel" Style="ShellBGBox" Size="parent,parent" Hidden="1">
+        
+            <Box Style="ShellBGBox" Size="800,500" Anchor="C,C">
+                <Container ID="Header" Style="ShellHeaderContainer" Size="parent, 50">
+                    <Label ID="WindowTitle" Style="ShellHeader" Anchor="C,C" String="History view Option"/>
+                </Container>
+                <Grid ID="Content" Style="SubContainer4" Size="parent-50,parent-80" Anchor="C,T" Color="7,28,50" Offset="0,55">
+                    <Stack StackPadding="2,0" Offset="5,20">
+                        <Label ID="OptionTitle" Style="ShellHeader" Anchor="C,C" String="UI Option"/>
+                        <GridButton ID="SetStrategicViewOnOpen" Anchor="L,T"  Size="300,24" Style="CheckBoxControl" String="Set strategic view on open" ToolTip="3D may bug but you can see my tooltip (if you want to see tooltip deactivate this)" />
+                        <GridButton ID="SetStrategicViewOnClose" Anchor="L,T"  Size="300,24" Style="CheckBoxControl" String="Set strategic view on quit" ToolTip="If enabled set strategic view when history view is closed" />
+                        <GridButton ID="EndTurnSound" Anchor="L,T"  Size="300,24" Style="CheckBoxControl" String="Toggle sound" ToolTip="If enabled, activate a sound played at start of each turn, you should not play before, only usefull on big map cause save data can take more than 10 sec" />
+                        <GridButton ID="HideHistoryViewButton" Anchor="L,T"  Size="300,24" Style="CheckBoxControl" String="Hide button" ToolTip="Hide the buton to open history view (only way to open history view will be shift+R)" />
+                        <Stack ID="SliderStack" StackGrowth="Right" Padding="5">
+                            <Label  Style="ShellOptionText" String="Camera speed" ID="CameraSpeedSliderName"  ToolTip="Use shift to go even faster"/>
+                            <Slider Style="SliderControl" Offset="5,0" Size="120,13" ID="HistoryViewCameraSpeed" ToolTip="Use shift to go even faster" />
+                            <Container Size="60,18">
+                                <Label  Style="ShellOptionText" String="50" ID="OptionValue"  ToolTip="Use shift to go even faster"/>
+                            </Container>
+                        </Stack>
+                    </Stack>
+                    <Stack StackPadding="2,0" Anchor="R,T" Offset="5,20" ID="CheatStack">
+                        <Label ID="OptionTitle2" Style="ShellHeader" Anchor="C,C" String="Cheats Option"/>
+                        <GridButton ID="ShowUnitLastTurn" Anchor="L,T"  Size="300,24" Style="CheckBoxControl" String="Show last 5 turn invisible enemy units" ToolTip="If disabled hide non visible enemy units on last 5 turns" />
+                        <GridButton ID="RevealHistoryViewMap" Anchor="L,T"  Size="300,24" Style="CheckBoxControl" String="Reveal Map" ToolTip="If enebled you can see plot history even if plot is not revealed" />
+                        <GridButton ID="ShowUndiscoveredResource" Anchor="L,T"  Size="300,24" Style="CheckBoxControl" String="Show undiscovered resource" ToolTip="Show resource even if you do not have the Tech/civic to see it" />
+                    </Stack>
+                    <Stack StackPadding="2,0" StackGrowth="Right"  Anchor="C,B"  Offset="0,40">
+                        <GridButton ID="OkButton" Size="200,36" Anchor="C,B" Style="ShellButtonOrnateFlat" Offset="0,-12">
+					       <Label Anchor="C,C" String="TXT_KEY_MY2K_ADDITION_OK" Style="ShellFlagButtonFont" />
+			            </GridButton>
+                        <GridButton ID="CancelButton" Size="200,36" Anchor="C,B" Style="ShellButtonOrnateFlat" Offset="0,-12">
+					       <Label Anchor="C,C" String="TXT_KEY_MY2K_ADDITION_CANCEL" Style="ShellFlagButtonFont" />
+			            </GridButton>
+                    </Stack>
+                </Grid>
+            </Box>
+        </Box>
+        
+    </Image>
+    <Container                                        Size="parent,parent">
+		<Container  ID="LeftScreenEdge"    Anchor="L,T" Size="2,parent" />
+		<Container  ID="RightScreenEdge"   Anchor="R,T" Size="2,parent" />
+		<Container  ID="TopScreenEdge"     Anchor="L,T" Size="parent,2" />
+		<Container  ID="BottomScreenEdge"  Anchor="L,B" Size="parent,2" />
+	</Container>
+    
+    
+    <Instance Name="LegendFill">
+        <Button ID="GoToCiv" Anchor="C,C"	Offset="0,30"		Size="330,30">
+            <Stack StackGrowth="Right" Anchor="L,C" StackPadding="5,0">
+                <Image ID="ColorImage"  Size="32,36" Color="0,0,255,255" Texture="Controls_KeySwatchHex">
+                    <Image ID="Icon" Size="22,22" Texture="CivSymbols22" Anchor="C,C"/>
+                </Image>
+                <Label ID="Name" Style="FontFlair28" Color="170,176,180" String="Empire Romain" Anchor="C,C" />
+            </Stack>
+        </Button>
+    </Instance>
+    
+    <Instance Name="SearchResultInstance">
+		<Container ID="Root" Size="auto,auto">
+			<GridButton ID="Button" Offset="0,0" Size="193,auto" Style="ButtonLightWeightGrid" InnerPadding="10,10">
+                <Label ID="Name" Offset="40,0" Style="FontNormal14" String="TechName" Anchor="L,C" WrapWidth="parent-45" ColorSet="BodyTextCool"/>
+                <Image Texture="Controls_CircleRim40" Size="40,40" Anchor="L,C" Color="255,255,255,200">
+                    <Image ID="SearchIcon" Size="38,38" Texture="Tech38"/>
+                </Image>
+			</GridButton>
+		</Container>
+	</Instance>
+    
+    <Instance Name="WarInfo">
+        <GridButton ID="MoreWarInfo" Size="175,70" Style="ButtonLightWeightGrid">
+            <Stack StackGrowth="Right" >
+                <Container Size="55,55">
+			        <Image Texture="Controls_CircleBacking45" Size="51,51" Anchor="C,C" Offset="0,1"/>
+			        <Image ID="Portrait" Anchor="C,C" Size="45,45" Texture="Leaders45" />
+			        <Image ID="MinorCivIcon" Anchor="C,C" Size="30,30" Texture="Leaders45" />
+                    <Container   ID="WarAllyStack" Anchor="L,T" Size="parent,parent" StackGrowth="Right" StackPadding="-2,0"/>
+                </Container>
+                <Image Icon="ICON_BELIEF_GOD_OF_WAR" Size="51,51" Anchor="C,C" Offset="0,1" Color="255,2,2,255"/>
+                <Container Size="55,55">
+                    <Image Texture="Controls_CircleBacking45" Size="51,51" Anchor="C,C" Offset="0,1"/>
+			        <Image ID="Portrait2" Anchor="C,C" Size="45,45" Texture="Leaders45" />
+                    <Image ID="MinorCivIcon2" Anchor="C,C" Size="30,30" Texture="Leaders45" />
+                    <Container   ID="WarEnemyStack" Anchor="L,T" Size="parent,parent" StackGrowth="Right" StackPadding="-2,0"/>
+                </Container>
+            </Stack>
+        </GridButton> 
+    </Instance>
+    <Instance Name ="WarAlly">
+            <Image ID="CivIndicator" Anchor="R,T" Texture="CircleBacking22" Size="22,22" Offset="-5,-2" >
+				<Image ID="CivIcon" Anchor="C,C" Texture="CivSymbols22" Size="22,22"/>
+            </Image> 
+    </Instance>
+    
+    <Instance Name ="WarUnitInfo">
+        <Stack ID="Anchor" StackGrowth="Right"  StackPadding="-20,0">
+            <Image ID="UnitIcon1" Anchor="C,C" Size="30,30" Offset="0,0"  />
+            <Image ID="UnitIcon2" Anchor="C,C" Size="30,30" Offset="0,0" />
+            <Image ID="UnitIcon3" Anchor="C,C" Size="30,30" Offset="0,0" />
+            <Image ID="UnitIcon4" Anchor="C,C" Size="30,30" Offset="0,0" />
+            <Image ID="UnitIcon5" Anchor="C,C" Size="30,30" Offset="0,0" />
+            <Image ID="UnitIcon6" Anchor="C,C" Size="30,30" Offset="0,0" />
+            <Image ID="UnitIcon7" Anchor="C,C" Size="30,30" Offset="0,0" />
+            <Image ID="UnitIcon8" Anchor="C,C" Size="30,30" Offset="0,0" />
+            <Image ID="UnitIcon9" Anchor="C,C" Size="30,30" Offset="0,0" />
+            <Image ID="UnitIcon10" Anchor="C,C" Size="30,30" Offset="0,0" />
+            <Image ID="UnitIcon11" Anchor="C,C" Size="30,30" Offset="0,0" />
+            <Image ID="UnitIcon12" Anchor="C,C" Size="30,30" Offset="0,0" />
+            <Image ID="UnitIcon13" Anchor="C,C" Size="30,30" Offset="0,0" />
+            <Image ID="UnitIcon14" Anchor="C,C" Size="30,30" Offset="0,0" />
+        </Stack>
+    </Instance>
+    
+    <Instance Name="PlotHistoryInstance">
+        <Container ID="PlotContainer" Size="256,288">
+            <Button ID="OwnerColorButton" Anchor="C,C" Size="256,288" Color="0,0,255,255" Texture="Controls_KeySwatchHex">
+                    <Image ID="PlotImage" Anchor="C,C" Texture="Controls_Placeholder256" Size="parent-32,parent-64" Icon="ICON_TERRAIN_SNOW" Offset="0, 0">
+                        <Container ID="HealthBarContainer" Size="11,32" Anchor="C,C" Offset="-55">
+                            <Image ID="HealthBarBacking" Size="parent,parent" Anchor="L,C"  Direction="Up" Speed="1" Texture="UnitFlag_MeterBG.dds" ConsumeMouse="1" />
+                            <TextureBar ID="HealthBar" Size="parent,parent" Anchor="L,C"  Direction="Up" Speed="1" Texture="UnitFlag_MeterFill.dds" />
+                        </Container>
+                        <Container ID="IconContainer" Size="parent-60,parent-60" Anchor="C,C">
+                            <Image ID="OrangeBack" Anchor="C,C" Size="parent,parent" Offset="1,1" Color="255,165,0,255" Icon="ICON_UNIT_WARRIOR" />
+                            <Image ID="plotUnitIcon" Anchor="C,C" Size="parent-40,parent-40" Icon="ICON_UNIT_WARRIOR"  />
+                            <Image ID="ResourceIcon" Anchor="C,C" Size="parent-100,parent-100" Icon="ICON_UNIT_WARRIOR" />
+                        </Container>
+                            
+                    </Image>
+            </Button>
+        </Container>
+    </Instance>
+    <Instance Name="PlotHistoryStackInstance">
+        <Stack  ID="PlotStack" StackGrowth="Right"  StackPadding="-32,0"/> 
+    </Instance>
+</Context>  
+
+
+

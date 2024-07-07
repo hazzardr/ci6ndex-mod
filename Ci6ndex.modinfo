@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Mod id="d580e74c-0675-4699-a74b-98d9aa661dd8" version="1">
+  <Properties>
+    <Name>Ci6ndex</Name>
+    <Stability>Beta</Stability>
+    <Teaser>Ci6ndex</Teaser>
+    <Description>Log gameplay stats for ego measuring later!</Description>
+    <Authors>Shuggie</Authors>
+    <CompatibleVersions>2.0</CompatibleVersions>
+  </Properties>
+  <InGameActions>
+    <GameplayScripts id="Ci6ndex_Scripts">
+        <Items>
+            <File>Ci6ndexScript.lua</File>
+        </Items>
+    </GameplayScripts>
+    <AddUserInterfaces id="RP_UI">
+      <Properties>
+        <Context>InGame</Context>
+      </Properties>
+      <File>Ci6ndex.xml</File>
+    </AddUserInterfaces>
+  </InGameActions>
+    
+    
+  <Files>
+	  <File>Ci6ndexScript.lua</File>
+	  <File>Ci6ndex.lua</File>
+    <File>Ci6ndex.xml</File>
+  </Files>
