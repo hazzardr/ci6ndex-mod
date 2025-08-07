@@ -1,30 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Mod id="d580e74c-0675-4699-a74b-98d9aa661dd8" version="1">
+<Mod id="dbd5e861-1f93-4777-9248-d9aea827e50c" version="1">
   <Properties>
     <Name>Ci6ndex</Name>
     <Stability>Beta</Stability>
-    <Teaser>Ci6ndex</Teaser>
-    <Description>Log gameplay stats for ego measuring later!</Description>
+    <Teaser>Chicken Soup Multiplayer Adjustments</Teaser>
+    <Description>Modify Strategic Resource Generation</Description>
     <Authors>Shuggie</Authors>
+    <SpecialThanks>CPL,isau,Gueux</SpecialThanks>
     <CompatibleVersions>2.0</CompatibleVersions>
   </Properties>
+  <Components>
+    <UpdateDatabase id="civdex_base_db_updates">
+      <File>sql/civdex_strat_resources.sql</File>
+    </UpdateDatabase>
+  </Components>
   <InGameActions>
-    <GameplayScripts id="Ci6ndex_Scripts">
-        <Items>
-            <File>Ci6ndexScript.lua</File>
-        </Items>
-    </GameplayScripts>
-    <AddUserInterfaces id="RP_UI">
-      <Properties>
-        <Context>InGame</Context>
-      </Properties>
-      <File>Ci6ndex.xml</File>
-    </AddUserInterfaces>
+<!--    <GameplayScripts id="Ci6ndex_Scripts">-->
+<!--        <Items>-->
+<!--            <File>Ci6ndexScript.lua</File>-->
+<!--        </Items>-->
+<!--    </GameplayScripts>-->
+<!--    <AddUserInterfaces id="RP_UI">-->
+<!--      <Properties>-->
+<!--        <Context>InGame</Context>-->
+<!--      </Properties>-->
+<!--      <File>Ci6ndex.xml</File>-->
+<!--    </AddUserInterfaces>-->
   </InGameActions>
     
     
   <Files>
-	  <File>Ci6ndexScript.lua</File>
-	  <File>Ci6ndex.lua</File>
-    <File>Ci6ndex.xml</File>
+    <File>sql/civdex_strat_resources.sql</File>
+<!--	  <File>Ci6ndexScript.lua</File>-->
+<!--	  <File>Ci6ndex.lua</File>-->
+<!--    <File>Ci6ndex.xml</File>-->
   </Files>
+</Mod>

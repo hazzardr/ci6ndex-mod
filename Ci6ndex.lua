@@ -1358,13 +1358,15 @@ function OnPlotInfoStackTimeEnd()
 end
 
 function GetTurnInformations()
+    print("new turn started !")
     if not Game then
         return;
     end
     local CurrentTurn                                   = Game.GetCurrentGameTurn() -1
     if HistoryData.GameData[CurrentTurn] and HistoryData.GameData[CurrentTurn].RealPopulation then
         CurrentTurn                                     = Game.GetCurrentGameTurn() 
-    end
+    end 
+    
     local TurnInformation       = {}
     TurnInformation.Name        = "Turn "..CurrentTurn
     TurnInformation.Tooltip     = GameConfiguration.GetValue("TurnTooltip."..CurrentTurn)
@@ -1385,7 +1387,6 @@ function GetTurnInformations()
     local GamePopulation = 0;
 	for _, pPlayer in ipairs(kPlayers) do
         local playerID  = pPlayer:GetID();
-        print("brian test"..playerID)
         HistoryData.PlayerData[playerID][CurrentTurn]    = {}
         local PlayerToolTip = "";
         local playerRealPop = 0
@@ -2761,7 +2762,28 @@ function GetData()
         
     end
 end
-
+function saveTable(tbl, indent)
+    if not indent then indent = "" end
+    local tosave = "{\n"
+    local nextIndent -- Stores the indentation for the next line
+    for k, v in pairs(tbl) do
+        if type(k) == "number" then
+            k = "[" .. k .. "]"
+        elseif type(k) == "string" then
+            k = string.format("%q", k)
+        end
+        nextIndent = indent .. "    "
+        if type(v) == "table" then
+            tosave = tosave .. nextIndent .. k .. " = " .. saveTable(v, nextIndent) .. ",\n"
+        elseif type(v) == "number" or type(v) == "boolean" then
+            tosave = tosave .. nextIndent .. k .. " = " .. tostring(v) .. ",\n"
+        elseif type(v) == "string" then
+            tosave = tosave .. nextIndent .. k .. " = " .. string.format("%q", v) .. ",\n"
+        end
+    end
+    tosave = tosave .. indent .. "}"
+    return tosave
+end
 function Initialize()
     
     Controls.PlayPauseButton:RegisterCallback( Mouse.eLClick, TogglePlayHistory );
@@ -2900,6 +2922,7 @@ function Initialize()
     
     CreateMap()
     GetData()
+    -- io.open("HistoryData.lua", "w"):write("HistoryData = "..saveTable(HistoryData)):close()
     
 end
 
