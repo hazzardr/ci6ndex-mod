@@ -16,6 +16,7 @@ help:
 .PHONY: clean ## Deletes local mod folder and local packages
 clean:
 	@rm -rf "$(MOD_FOLDER_LOC)/Ci6ndex"
+	@rm -rf "$(DEV_TOOLS_LOC)/Ci6ndex"
 	@rm -rf build/
 
 .PHONY: dev ## Copies script files to local Civ 6 installation for debugging / testing

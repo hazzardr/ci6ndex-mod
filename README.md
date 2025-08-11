@@ -20,6 +20,6 @@ To install this mod, you should follow [these steps](<https://civilization.fando
 2. Click the release you want (specifically, the `ci6ndex.tar.gz` file) to download it
 3. Unzip this file which should give you a folder called `Ci6ndex`
 4. Put the `Ci6ndex` folder in your mods folder
-   4a. This is commonly at "%UserProfile%\Documents\My Games\Sid Meier's Civilization VI\Mods" on Windows
+   - This is commonly at "%UserProfile%\Documents\My Games\Sid Meier's Civilization VI\Mods" on Windows
 5. Start CIV 6
 6. Go to "Additional Content" and ensure you see `Ci6ndex` as a listed mod
